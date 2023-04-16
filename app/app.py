@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
 from flask import Flask, request, jsonify
 from pymongo import MongoClient
+from bson import ObjectId
 
 app = Flask(__name__)
 
@@ -36,6 +37,7 @@ def get_product_data(url):
     description = description_element.get_text() if description_element else None
 
     data = {
+        '_id': str(ObjectId()),
         'title': title,
         'image': image,
         'price': price,
