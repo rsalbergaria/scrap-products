@@ -2,6 +2,8 @@
 
 Scrap Products is a Python api to receive a product url and return datas about this product;
 
+Use products from https://www.saraiva.com.br/
+
 ## Usage
 
 1 - Run docker to dabatabase

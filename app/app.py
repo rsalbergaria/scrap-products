@@ -32,7 +32,7 @@ def get_product_data(url):
         print(f"Failed to retrieve product data from {url}: {e}")
         return None
 
-    title_element = soup.find('h1', {'data-testid': 'heading-product-title'})
+    title_element = soup.find('span', {'class': 'vtex-store-components-3-x-productBrand vtex-store-components-3-x-productBrand--quickview'})
     title = title_element.get_text() if title_element else None
 
     data = {
