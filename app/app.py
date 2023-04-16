@@ -32,24 +32,15 @@ def get_product_data(url):
         print(f"Failed to retrieve product data from {url}: {e}")
         return None
 
-    title_element = soup.find('h1', {'class': 'header-product__title'})
+    title_element = soup.find('h1', {'data-testid': 'heading-product-title'})
     title = title_element.get_text() if title_element else None
-
-    image_element = soup.find('div', {'class': 'showcase-product__big-img'})
-    image = image_element.find('img')['src'] if image_element else None
-
-    price_element = soup.find('div', {'class': 'price-template__value'})
-    price = price_element.get_text() if price_element else None
-
-    description_element = soup.find('div', {'class': 'description__container'})
-    description = description_element.get_text() if description_element else None
 
     data = {
         '_id': str(ObjectId()),
         'title': title,
-        'image': image,
-        'price': price,
-        'description': description,
+        #'image': image,
+        #'price': price,
+        #'description': description,
         'url': url,
         'timestamp': datetime.utcnow()
     }
