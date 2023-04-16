@@ -62,9 +62,11 @@ def get_product():
     if not url:
         return jsonify({'error': 'No URL provided.'}), 400
     
-    # Check if product data is already in cache
+     # Check if product data is already in cache
     cached_data = collection.find_one({'url': url})
     if cached_data and is_cached_data_valid(cached_data):
+        # Convert the ObjectId to a string representation before returning as JSON
+        cached_data['_id'] = str(cached_data['_id'])
         return jsonify(cached_data)
     
     # Scrape product data from URL
