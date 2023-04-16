@@ -19,3 +19,12 @@ pip3 install -r requirements.txt
 python app.py
 ```
 
+3 - Request Example:
+```bash
+curl --location 'http://127.0.0.1:5000/products' \
+--header 'Content-Type: application/json' \
+--data '{
+    "url": "https://www.saraiva.com.br/cabo-micro-usb-general-electric-pro-0-9m-ultra-resistente-com-adaptador-lightning-para-iphone/p"
+}'
+```
+
