@@ -21,19 +21,27 @@ cache_expiration = timedelta(hours=1)
 
 # Define a function to scrape product data from a URL
 def get_product_data(url):
-    response = requests.get(url)
-    soup = BeautifulSoup(response.content, 'html.parser')
+    try:
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
+        response = requests.get(url, headers=headers)
+        print(response)
+        soup = BeautifulSoup(response.content, 'html.parser')
+        print(soup.prettify())
+        response.raise_for_status()
+    except requests.exceptions.RequestException as e:
+        print(f"Failed to retrieve product data from {url}: {e}")
+        return None
 
-    title_element = soup.find('h1', {'class': 'product-name'})
+    title_element = soup.find('h1', {'class': 'header-product__title'})
     title = title_element.get_text() if title_element else None
 
-    image_element = soup.find('img', {'class': 'js-main-image'})
-    image = image_element['src'] if image_element else None
+    image_element = soup.find('div', {'class': 'showcase-product__big-img'})
+    image = image_element.find('img')['src'] if image_element else None
 
-    price_element = soup.find('span', {'class': 'price-current'})
+    price_element = soup.find('div', {'class': 'price-template__value'})
     price = price_element.get_text() if price_element else None
 
-    description_element = soup.find('div', {'class': 'product-description'})
+    description_element = soup.find('div', {'class': 'description__container'})
     description = description_element.get_text() if description_element else None
 
     data = {
@@ -73,6 +81,10 @@ def get_product():
     
     # Scrape product data from URL
     product_data = get_product_data(url)
+
+    # Check that product_data is a dictionary
+    if not isinstance(product_data, dict):
+        return jsonify({'error': 'Product data is not valid.'}), 400
     
     # Cache product data in database
     collection.replace_one({'url': url}, product_data, upsert=True)
