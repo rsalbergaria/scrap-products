@@ -2,7 +2,7 @@
 
 Scrap Products is a Python api to receive a product url and return datas about this product;
 
-## Usafe
+## Usage
 
 1 - Run docker to dabatabase
 ```bash
