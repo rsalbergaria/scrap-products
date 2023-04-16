@@ -19,7 +19,13 @@ pip3 install -r requirements.txt
 python app.py
 ```
 
-3 - Request Example:
+3 - Run test
+
+```bash
+ python -m unittest app_test.py
+ ```
+
+4 - Request Example:
 ```bash
 curl --location 'http://127.0.0.1:5000/products' \
 --header 'Content-Type: application/json' \
