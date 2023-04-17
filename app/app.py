@@ -8,7 +8,7 @@ from bson import ObjectId
 app = Flask(__name__)
 
 # Connect to MongoDB using the root user and password
-client = MongoClient('mongodb://root:password@localhost:27017/')
+client = MongoClient('mongodb://root:password@mongo:27017/')
 
 # Select the database
 db = client['product_database']
