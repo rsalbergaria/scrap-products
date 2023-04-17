@@ -1,6 +1,15 @@
 version: '3'
 
 services:
+  web:
+    build: .
+    ports:
+      - "5002:5000"
+    networks:
+      - products-network
+    depends_on:
+      - mongo
+      
   mongo:
     image: mongo:latest
     restart: always
