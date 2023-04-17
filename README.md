@@ -8,7 +8,7 @@ Use products from https://www.saraiva.com.br/
 
 1 - Run 
 ```bash
-cd mongo 
+cd app
 docker compose up -d
 ```
 

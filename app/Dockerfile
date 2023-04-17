@@ -13,6 +13,9 @@ RUN pip3 install -r requirements.txt
 # Copy the rest of the application code into the container at /app
 COPY . /app
 
+# Run tests before starting Flask application
+RUN python3 app_test.py
+
 # Make port 5000 available to the world outside this container
 EXPOSE 5000
 
